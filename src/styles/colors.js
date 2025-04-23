@@ -3,6 +3,8 @@ const primaryBlue = '#6EA7C1';
 const primaryPurple = '#6B55AE';
 const accentPink = '#E67FA2';
 const accentYellow = '#FFEFA1';
+const mintGreen = '#A6F1E0';
+const softPastel = '#F4F8D3';
 
 // Functional color assignments
 export const Colors = {
@@ -61,6 +63,17 @@ export const Colors = {
     talking: primaryPurple,
     excited: accentPink,
     happy: accentYellow,
+  },
+  // New color categories
+  mint: {
+    primary: mintGreen,
+    light: mintGreen + '80',  // 50% opacity
+    dark: '#74D9C8',
+  },
+  pastel: {
+    primary: softPastel,
+    light: softPastel + '80',  // 50% opacity
+    dark: '#DDE2B2',
   }
 };
 
@@ -70,4 +83,6 @@ export const AppColors = {
   primaryPurple,
   accentPink,
   accentYellow,
+  mintGreen,
+  softPastel,
 };

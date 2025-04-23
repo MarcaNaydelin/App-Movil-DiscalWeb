@@ -31,7 +31,7 @@ const WelcomeScreen = ({ navigation }) => {
     greeting: require('../../assets/img/mascota/mascota1.png'),
     talking: require('../../assets/img/mascota/mascota3.png'),
     excited: require('../../assets/img/mascota/mascota4.png'),
-    happy: require('../../assets/img/mascota/mascota5.png')
+    happy: require('../../assets/img/mascota/mascota6.png')
   };
 
   const [currentMascotImage, setCurrentMascotImage] = useState(mascotImages.greeting);
@@ -200,7 +200,7 @@ const WelcomeScreen = ({ navigation }) => {
       duration: 800,
       useNativeDriver: true,
     }).start(() => {
-      navigation.navigate('GameMenu');
+      navigation.navigate('Home');
     });
   };
 

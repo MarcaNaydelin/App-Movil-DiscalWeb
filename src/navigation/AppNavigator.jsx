@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../screens/SplashScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import GameMenuScreen from '../screens/GameMenuScreen';
+import HomeScreen from '../screens/HomeScreen'; 
 
 // Crea el stack de navegación
 const Stack = createNativeStackNavigator();
@@ -19,9 +20,26 @@ const AppNavigator = () => {
           animation: 'fade',
         }}
       >
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="GameMenu" component={GameMenuScreen} />
+        <Stack.Screen 
+          name="Splash" 
+          component={SplashScreen} 
+          options={{ gestureEnabled: false }}
+        />
+        <Stack.Screen 
+          name="Welcome" 
+          component={WelcomeScreen} 
+          options={{ gestureEnabled: false }}
+        />
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ gestureEnabled: false }}
+        />
+        <Stack.Screen 
+          name="GameMenu" 
+          component={GameMenuScreen}
+          options={{ gestureEnabled: false }} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

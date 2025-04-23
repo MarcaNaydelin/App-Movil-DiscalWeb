@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { Colors } from '../styles/colors';
 
 const BottomTabBar = ({ currentTab, onTabPress, style }) => {
+  const navigation = useNavigation();
+  
   const tabs = [
     { id: 'home', name: 'Inicio', icon: 'home' },
     { id: 'games', name: 'Juegos', icon: 'game-controller' },
@@ -11,12 +14,25 @@ const BottomTabBar = ({ currentTab, onTabPress, style }) => {
     { id: 'profile', name: 'Perfil', icon: 'person' },
   ];
   
+  const handleTabPress = (tabId) => {
+    if (tabId === currentTab) return;
+    
+    if (tabId === 'home') {
+      navigation.navigate('Home');
+    } else if (tabId === 'games') {
+      navigation.navigate('GameMenu');
+    } else {
+      // Por implementar otras pantallas
+      onTabPress(tabId);
+    }
+  };
+  
   return (
     <View style={[styles.container, style]}>
       {tabs.map(tab => (
         <TouchableOpacity
           key={tab.id}
-          onPress={() => onTabPress(tab.id)}
+          onPress={() => handleTabPress(tab.id)}
           style={[styles.tab, currentTab === tab.id && styles.activeTab]}
         >
           <Ionicons 
@@ -44,16 +60,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderTopColor: '#EEEEEE',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    height: 60,
   },
   tab: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
   activeTab: {
     backgroundColor: 'rgba(107, 85, 174, 0.05)',

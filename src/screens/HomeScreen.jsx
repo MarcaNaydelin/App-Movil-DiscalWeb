@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, StatusBar, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,7 +9,8 @@ import SkillProgressCard from '../components/common/SkillProgressCard';
 import MascotBubble from '../components/common/MascotBubble';
 import { Colors, AppColors } from '../styles/colors';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
   const [skills] = useState([
     { id: 1, title: 'Suma', progress: 5, icon: 'add' },
     { id: 2, title: 'Resta', progress: 10, icon: 'remove' },
@@ -17,9 +18,22 @@ const HomeScreen = ({ navigation }) => {
     { id: 4, title: 'División', progress: 20, icon: 'divide' },
   ]);
 
+  // Verificar si venimos de otra pestaña
+  useEffect(() => {
+    if (route.params?.fromTab) {
+      setShowWelcomeMessage(false);
+    } else {
+      setShowWelcomeMessage(true);
+    }
+  }, [route.params]);
+
   const handleTabPress = (tabId) => {
     if (tabId === 'games') {
       navigation.navigate('GameMenu');
+    } else if (tabId === 'achievements') {
+      navigation.navigate('Achievements');
+    } else if (tabId === 'profile') {
+      navigation.navigate('Profile');
     }
   };
 
@@ -34,13 +48,15 @@ const HomeScreen = ({ navigation }) => {
       >
         <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
           <HeaderBar title="Mis Habilidades" stars={15} />
-
-          <View style={styles.bannerContainer}>
-            <MascotBubble 
-              message="¡Practica para mejorar tus habilidades!"
-              style={styles.mascotBubble}
-            />
-          </View>
+          
+          {showWelcomeMessage && (
+            <View style={styles.bannerContainer}>
+              <MascotBubble
+                message="¡Practica para mejorar tus habilidades!"
+                style={styles.mascotBubble}
+              />
+            </View>
+          )}
 
           <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.skillsGrid}>

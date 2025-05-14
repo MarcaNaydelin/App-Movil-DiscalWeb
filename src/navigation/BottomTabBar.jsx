@@ -18,11 +18,16 @@ const BottomTabBar = ({ currentTab, onTabPress, style }) => {
     if (tabId === currentTab) return;
     
     if (tabId === 'home') {
-      navigation.navigate('Home');
+      navigation.navigate('Home', { fromTab: true });
     } else if (tabId === 'games') {
       navigation.navigate('GameMenu');
-    } else {
-      // Por implementar otras pantallas
+    } else if (tabId === 'achievements') {
+      navigation.navigate('Achievements');
+    } else if (tabId === 'profile') {
+      navigation.navigate('Profile');
+    }
+
+    if (onTabPress) {
       onTabPress(tabId);
     }
   };
@@ -35,17 +40,15 @@ const BottomTabBar = ({ currentTab, onTabPress, style }) => {
           onPress={() => handleTabPress(tab.id)}
           style={[styles.tab, currentTab === tab.id && styles.activeTab]}
         >
-          <Ionicons 
-            name={tab.icon} 
-            size={22} 
-            color={currentTab === tab.id ? Colors.text.highlight : Colors.text.secondary} 
+          <Ionicons
+            name={tab.icon}
+            size={24}
+            color={currentTab === tab.id ? Colors.text.highlight : Colors.text.secondary}
           />
-          <Text 
-            style={[
-              styles.tabLabel, 
-              currentTab === tab.id && styles.activeTabLabel
-            ]}
-          >
+          <Text style={[
+            styles.tabLabel,
+            currentTab === tab.id && styles.activeTabLabel
+          ]}>
             {tab.name}
           </Text>
         </TouchableOpacity>

@@ -6,6 +6,7 @@ import SplashScreen from '../screens/SplashScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import GameMenuScreen from '../screens/GameMenuScreen';
 import HomeScreen from '../screens/HomeScreen'; 
+import AchievementsScreen from '../screens/AchievementsScreen';
 
 // Crea el stack de navegación
 const Stack = createNativeStackNavigator();
@@ -39,6 +40,11 @@ const AppNavigator = () => {
           name="GameMenu" 
           component={GameMenuScreen}
           options={{ gestureEnabled: false }} 
+        />
+        <Stack.Screen
+          name="Achievements"
+          component={AchievementsScreen}
+          options={{ gestureEnabled: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

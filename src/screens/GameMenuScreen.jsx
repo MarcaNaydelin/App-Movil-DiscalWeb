@@ -12,67 +12,80 @@ const GameMenuScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   
   const games = [
-    { 
-      id: 'suma_espacial', 
-      name: 'Suma Espacial', 
-      description: 'Viaja al espacio sumando meteoritos', 
-      category: 'suma', 
-      level: 1, 
-      stars: 2, 
-      icon: '🚀',
-      color: AppColors.primaryPurple
+    {
+      id: 'prehistoric_forms',
+      name: 'Formas Prehistóricas',
+      description: 'Descubre las figuras ocultas en rocas jurásicas',
+      category: 'formas',
+      level: 1,
+      stars: 0,
+      icon: '🦕',
+      color: Colors.mundo1.primary
     },
-    { 
-      id: 'suma_frutas', 
-      name: 'Suma Frutas', 
-      description: 'Aprende a sumar con frutas deliciosas', 
-      category: 'suma', 
-      level: 2, 
-      stars: 3, 
-      icon: '🍎',
+    {
+      id: 'crystal_cave',
+      name: 'Cueva de Cristales Numéricos',
+      description: 'Explora números mágicos en cristales brillantes (0-9)',
+      category: 'numeros',
+      level: 1,
+      stars: 0,
+      icon: '💎',
       color: AppColors.primaryBlue
     },
-    { 
-      id: 'suma_animales', 
-      name: 'Suma Animales', 
-      description: 'Suma con animales divertidos', 
-      category: 'suma', 
-      level: 3, 
-      stars: 1, 
-      icon: '🐶',
-      color: AppColors.accentPink
-    },
-    { 
-      id: 'resta_espacial', 
-      name: 'Resta Espacial', 
-      description: 'Viaja al espacio restando meteoritos', 
-      category: 'resta', 
-      level: 2, 
-      stars: 3, 
-      icon: '🌟',
-      color: AppColors.accentPink
-    },
-    { 
-      id: 'multi_magica', 
-      name: 'Multiplicación Mágica', 
-      description: 'Multiplica con el mago matemático', 
-      category: 'multi', 
-      level: 3, 
-      stars: 1, 
-      icon: '🧙‍♂️',
+    {
+      id: 'golden_fruits',
+      name: 'Valle de Frutas Doradas',
+      description: 'Aprende a contar del 1 al 10 con frutas deliciosas',
+      category: 'conteo',
+      level: 1,
+      stars: 0,
+      icon: '🍎',
       color: AppColors.accentYellow
     },
-    { 
-      id: 'div_submarina', 
-      name: 'División Submarina', 
-      description: 'Divide tesoros bajo el mar', 
-      category: 'div', 
-      level: 2, 
-      stars: 0, 
-      icon: '🐠',
-      color: Colors.states.info
+    {
+      id: 'bright_comparisons',
+      name: 'Río de Comparaciones Brillantes',
+      description: 'Compara cantidades en aguas cristalinas',
+      category: 'comparaciones',
+      level: 2,
+      stars: 0,
+      icon: '⚖️',
+      color: AppColors.mintGreen
     },
+    {
+      id: 'initial_sums',
+      name: 'Bosque de Sumas Iniciales',
+      description: 'Primeras sumas hasta 5, luego hasta 10',
+      category: 'sumas',
+      level: 2,
+      stars: 0,
+      icon: '🌳',
+      color: AppColors.accentPink
+    }
   ];
+
+  const handleGamePress = (game) => {
+    switch (game.id) {
+      case 'prehistoric_forms':
+        navigation.navigate('PrehistoricForms');
+        break;
+      case 'crystal_cave':
+        navigation.navigate('CrystalCave');
+        break;
+      case 'golden_fruits':
+        navigation.navigate('GoldenFruits');
+        break;
+      case 'bright_comparisons':
+        navigation.navigate('BrightComparisons');
+        break;
+      case 'initial_sums':
+        navigation.navigate('InitialSums');
+        break;
+      default:
+        // Navegar a una pantalla de "próximamente" o mostrar alerta
+        console.log(`Juego ${game.id} no implementado aún`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -81,7 +94,7 @@ const GameMenuScreen = ({ navigation }) => {
         style={[styles.background, { paddingTop: insets.top }]}
       >
         <HeaderBar 
-          title="Juegos" 
+          title="Mundos Mágicos" 
           onBack={() => navigation.goBack()} 
           stars={0}
           rightComponent={
@@ -109,11 +122,11 @@ const GameMenuScreen = ({ navigation }) => {
                 color={game.color}
                 icon={game.icon}
                 levelColors={{
-                  1: AppColors.primaryBlue, // Nivel 1 - Fácil - Azul
-                  2: AppColors.accentYellow, // Nivel 2 - Medio - Amarillo
-                  3: AppColors.accentPink, // Nivel 3 - Difícil - Rosa
+                  1: AppColors.primaryBlue,
+                  2: AppColors.accentYellow,
+                  3: AppColors.accentPink,
                 }}
-                onPress={() => navigation.navigate('GamePlay', { gameId: game.id })}
+                onPress={() => handleGamePress(game)}
               />
             ))}
           </ScrollView>

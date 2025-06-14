@@ -1,39 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Colors } from '../../styles/colors';
 
-const GameCard = ({ title, description, level, stars, color, icon, levelColors, onPress }) => {
+const GameCard = ({ 
+  title, 
+  description, 
+  level, 
+  stars, 
+  color, 
+  icon, 
+  levelColors, 
+  locked = false,
+  onPress 
+}) => {
   const maxStars = 3;
   
   const defaultLevelColors = {
-    1: '#4CAF50', // Verde para fácil
-    2: '#FF9800', // Naranja para medio
-    3: '#F44336', // Rojo para difícil
+    1: Colors.states.success, // Verde para fácil
+    2: Colors.states.warning, // Naranja para medio
+    3: Colors.states.error, // Rojo para difícil
   };
   
   const finalLevelColors = levelColors || defaultLevelColors;
 
+  const cardOpacity = locked ? 0.6 : 1;
+  const cardColor = locked ? '#CCCCCC' : color;
+
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-      <View style={styles.card}>
+    <TouchableOpacity 
+      onPress={onPress} 
+      activeOpacity={locked ? 1 : 0.8}
+      disabled={locked}
+    >
+      <View style={[styles.card, { opacity: cardOpacity }]}>
         <LinearGradient
-          colors={[color, color + '80']} 
+          colors={[cardColor, cardColor + '80']} 
           style={styles.gradient}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
           <View style={styles.iconContainer}>
-            <Text style={styles.gameIcon}>{icon || '🎮'}</Text>
+            {locked ? (
+              <Ionicons name="lock-closed" size={32} color="white" />
+            ) : (
+              <Text style={styles.gameIcon}>{icon || '🎮'}</Text>
+            )}
           </View>
         </LinearGradient>
         
         <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={[styles.title, locked && styles.lockedText]}>{title}</Text>
+          <Text style={[styles.description, locked && styles.lockedText]}>
+            {locked ? 'Completa el juego anterior' : description}
+          </Text>
           
           <View style={styles.footer}>
-            <View style={[styles.levelIndicator, { backgroundColor: finalLevelColors[level] || '#BBBBBB' }]}>
+            <View style={[
+              styles.levelIndicator, 
+              { backgroundColor: finalLevelColors[level] || '#BBBBBB' }
+            ]}>
               <Text style={styles.levelText}>Nivel {level}</Text>
             </View>
             
@@ -51,8 +78,12 @@ const GameCard = ({ title, description, level, stars, color, icon, levelColors, 
           </View>
         </View>
         
-        <View style={[styles.playButton, { backgroundColor: color }]}>
-          <Ionicons name="play" size={28} color="white" />
+        <View style={[styles.playButton, { backgroundColor: cardColor }]}>
+          <Ionicons 
+            name={locked ? "lock-closed" : "play"} 
+            size={28} 
+            color="white" 
+          />
         </View>
       </View>
     </TouchableOpacity>
@@ -100,13 +131,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333333',
+    color: Colors.text.primary,
     marginBottom: 6,
   },
   description: {
     fontSize: 14,
-    color: '#666666',
+    color: Colors.text.secondary,
     marginBottom: 12,
+  },
+  lockedText: {
+    color: '#AAAAAA',
   },
   footer: {
     flexDirection: 'row',

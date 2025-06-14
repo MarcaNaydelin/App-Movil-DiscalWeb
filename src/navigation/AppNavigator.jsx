@@ -8,6 +8,15 @@ import GameMenuScreen from '../screens/GameMenuScreen';
 import HomeScreen from '../screens/HomeScreen';
 import AchievementsScreen from '../screens/AchievementsScreen';
 
+import PrehistoricFormsScreen from '../screens/games/mundo1/PrehistoricFormsScreen';
+import RocasMisteriosasScreen from '../screens/games/mundo1/RocasMisteriosasScreen';
+import SombrasCambiantesScreen from '../screens/games/mundo1/SombrasCambiantesScreen';
+import CrystalCaveScreen from '../screens/games/mundo2/CrystalCaveScreen';
+import GoldenFruitsScreen from '../screens/games/mundo3/GoldenFruitsScreen';
+import BrightComparisonsScreen from '../screens/games/mundo4/BrightComparisonsScreen';
+import InitialSumsScreen from '../screens/games/mundo5/InitialSumsScreen';
+
+
 // Crea el stack de navegación
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +50,49 @@ const AppNavigator = () => {
           component={GameMenuScreen}
           options={{ gestureEnabled: false }} 
         />
+        <Stack.Screen 
+          name="PrehistoricForms" 
+          component={PrehistoricFormsScreen} 
+          options={{ gestureEnabled: false }} 
+        />
+        <Stack.Screen 
+          name="RocasMisteriosas" 
+          component={RocasMisteriosasScreen} 
+          options={{ gestureEnabled: false }} 
+        />
+        <Stack.Screen 
+          name="SombrasCambiantes" 
+          component={SombrasCambiantesScreen}
+          options={{ headerShown: false }}
+        />
+        {/* Mundo 2 */}
+        <Stack.Screen 
+          name="CrystalCave" 
+          component={CrystalCaveScreen} 
+          options={{ gestureEnabled: false }}
+        />
+
+        {/* Mundo 3 */}
+        <Stack.Screen 
+          name="GoldenFruits" 
+          component={GoldenFruitsScreen} 
+          options={{ gestureEnabled: false }}
+        />
+
+        {/* Mundo 4 */}
+        <Stack.Screen 
+          name="BrightComparisons" 
+          component={BrightComparisonsScreen} 
+          options={{ gestureEnabled: false }}
+        />
+
+        {/* Mundo 5 */}
+        <Stack.Screen 
+          name="InitialSums" 
+          component={InitialSumsScreen} 
+          options={{ gestureEnabled: false }}
+        />
+
         <Stack.Screen
           name="Achievements"
           component={AchievementsScreen}
